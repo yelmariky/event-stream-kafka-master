@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  
+  labels:
+    run: event-streams-kafka-svc
+  name: event-streams-kafka-svc
+ 
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: event-streams-kafka-svc
+  
+  template:
+    metadata:
+     
+      labels:
+        run: event-streams-kafka-svc
+    spec:
+      containers:
+      - name: event-streams-kafka-svc
+        image: event-streams-kafka:v1
+        imagePullPolicy: Never
+        ports:
+          - name: http
+            containerPort: 8080 # The port that the container exposes
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "500Mi"
+        env:
+        - name: KAFKA_USERNAME
+          value: token
+        - name: KAFKA_PASSWORD
+          value: vUbw_ecl7FQ3LZRq-RapUp5DxgIXSdFQRuohBRpQQ-2v
+        - name: URL_BROKER
+          value: broker-5-z9vk0cwd8pb8jj8v.kafka.svc04.us-south.eventstreams.cloud.ibm.com:9093
+        - name: KAFKA_ID_TOPIC
+          value: kafka-java-console-sample
+                
+---
+apiVersion: v1
+kind: Service
+metadata:
+  
+  labels:
+    run: event-streams-kafka-svc
+  name: event-streams-kafka-svc
+  
+spec:
+  ports:
+  - port: 8800
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 31000
+  selector:
+    run: event-streams-kafka-svc
+  type: NodePort
