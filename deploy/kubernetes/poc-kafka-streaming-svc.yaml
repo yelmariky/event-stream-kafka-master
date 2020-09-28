@@ -7,7 +7,6 @@ metadata:
   name: event-streams-kafka-svc
  
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
