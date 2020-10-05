@@ -34,11 +34,11 @@ spec:
         - name: KAFKA_USERNAME
           value: token
         - name: KAFKA_PASSWORD
-          value: vUbw_ecl7FQ3LZRq-RapUp5DxgIXSdFQRuohBRpQQ-2v
+          value: yyyyy
         - name: URL_BROKER
-          value: broker-5-z9vk0cwd8pb8jj8v.kafka.svc04.us-south.eventstreams.cloud.ibm.com:9093
+          value: zzzz
         - name: KAFKA_ID_TOPIC
-          value: kafka-java-console-sample
+          value: t-sample
                 
 ---
 apiVersion: v1
